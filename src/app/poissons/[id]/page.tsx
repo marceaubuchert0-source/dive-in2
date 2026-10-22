@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, Fish, Ruler, Waves, Tags, MapPin, CalendarDays, ShieldCheck } from "lucide-react";
-import SpeciesArt from "../../../components/illustrations/species-art";
+import Image from "next/image";
+import { photoPoisson } from "../../../lib/photos";
 import EmptyState from "../../../components/empty-state";
 import { useDonnees, dateFr } from "../../../lib/use-donnees";
 
@@ -17,7 +18,7 @@ function FishDetail() {
   const observations = data.plongees.filter((dive) => dive.poissonIds.includes(id)).sort((a, b) => b.date.localeCompare(a.date));
   return <main className="inner-page container fish-detail-page">
     <Link className="back-link" href="/poissons"><ArrowLeft size={17} /> Retour aux poissons</Link>
-    <div className="fish-banner"><SpeciesArt fish={fish} /></div>
+    <figure className="fish-banner"><div className="fish-banner-photo"><Image src={photoPoisson(fish).image} alt={`Photo de ${fish.nomCommun}`} fill sizes="(max-width: 700px) 100vw, 1200px" /></div><figcaption>{photoPoisson(fish).credit ? <>Photo : {photoPoisson(fish).credit} · <Link href="/credits">Crédits photos</Link></> : "Photo de fond marin par défaut"}</figcaption></figure>
     <div className="fish-detail-heading"><div><span className="page-heading-icon"><Fish size={24} aria-hidden="true" /></span><h1>{fish.nomCommun}</h1><p className="scientific-name"><em>{fish.nomScientifique || "Nom scientifique non renseigné"}</em></p></div>{fish.statut && <span className="badge badge-coral"><ShieldCheck size={15} />{fish.statut}</span>}</div>
     <div className="fish-facts"><div className="panel fish-fact"><Ruler size={24} /><span>Taille</span><strong>{fish.taille || "Non renseignée"}</strong></div><div className="panel fish-fact"><Waves size={24} /><span>Profondeur</span><strong>{fish.profondeurHabituelle || "Non renseignée"}</strong></div><div className="panel fish-fact"><Tags size={24} /><span>Famille</span><strong>{fish.famille || "Non renseignée"}</strong></div></div>
     <div className="fish-copy-grid"><section className="panel"><h2>Habitat</h2><p>{fish.habitat || "Habitat non renseigné pour cette espèce."}</p></section><section className="panel"><h2>Description</h2><p>{fish.description || "Une rencontre sous-marine à raconter lors de votre prochaine plongée."}</p></section></div>

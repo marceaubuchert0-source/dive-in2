@@ -241,9 +241,18 @@ button:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
 @media (max-width:700px) { .hero { padding-top:69px; }.fish-detail-page { padding-top:110px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; } }
 .equipment-card { justify-content:flex-start; flex-wrap:wrap; }
-.equipment-art { display:block; width:112px; height:94px; flex:none; border-radius:16px; }
 .equipment-copy { flex:1; min-width:120px; }
 .equipment-card .delete-link { margin-left:auto; }
-.fish-banner svg { object-fit:contain; background:#e4f4f4; }
-@media(max-width:450px) { .equipment-card { padding:16px; gap:12px; }.equipment-art { width:86px; height:78px; }.equipment-card .delete-link { margin-left:auto; }.fish-card-link { flex-wrap:nowrap; align-items:center; padding:16px 16px 52px; }.fish-card-art { width:90px; height:90px; flex:none; }.fish-card-arrow { position:static; }.fish-card-copy h3 { font-size:17px; } }
+@media(max-width:450px) { .equipment-card { padding:16px; gap:12px; }.equipment-card .delete-link { margin-left:auto; }.fish-card-copy h3 { font-size:19px; } }
+/* Photographies locales des espèces et du matériel. */
+.fish-card-link { display:block; padding:16px 16px 52px; min-height:0; }
+.fish-card-photo { display:block; position:relative; width:100%; aspect-ratio:4/3; border-radius:16px; overflow:hidden; background:#d8eded; margin-bottom:18px; }
+.fish-card-photo img,.fish-banner-photo img,.equipment-photo img,.pill-photo img,.credit-photo img { object-fit:cover; }
+.fish-card-copy { padding:0 6px; }.fish-card-arrow { position:absolute; right:22px; bottom:69px; }
+.fish-banner { margin:0; }.fish-banner-photo { position:relative; width:100%; height:clamp(260px,45vw,490px); border-radius:24px; overflow:hidden; background:#d8eded; }.fish-banner figcaption { margin-top:9px; color:var(--muted); font-size:12px; }.fish-banner figcaption a,.credit-card a { color:#08787e; text-decoration:underline; text-underline-offset:3px; }
+.equipment-photo { display:block; position:relative; width:80px; height:80px; flex:none; border-radius:14px; overflow:hidden; background:#d8eded; }
+.photo-pill { display:inline-flex; align-items:center; gap:9px; padding:5px 12px 5px 5px; }.pill-photo { position:relative; display:inline-block; width:36px; height:36px; border-radius:50%; overflow:hidden; flex:none; background:#d8eded; }
+.footer-bottom { align-items:center; gap:15px; flex-wrap:wrap; }.footer-bottom a { color:#b8e8e6; text-decoration:underline; }
+.credits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:18px; }.credit-card { min-width:0; }.credit-photo { position:relative; height:180px; border-radius:14px; overflow:hidden; margin-bottom:15px; }.credit-card h3 { font-size:16px; overflow-wrap:anywhere; }.credit-card p { font-size:13px; color:var(--muted); overflow-wrap:anywhere; }.credits-note { color:var(--muted); line-height:1.6; margin:30px 0; }
+@media(max-width:450px) { .equipment-copy { min-width:100px; }.fish-card-arrow { bottom:64px; } }
 
