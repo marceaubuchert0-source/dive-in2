@@ -1,4 +1,4 @@
-# [Nom du projet]
+# Dive-in
 Le carnet de plongée numérique qui rassemble vos spots, les conditions de chaque immersion, les poissons observés et votre équipement.
 
 ## Utilisateur cible
