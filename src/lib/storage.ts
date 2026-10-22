@@ -121,6 +121,20 @@ function supprimer(collection: Collection, id: string) {
   return true;
 }
 
+// Une seule écriture évite une plongée liée à des éléments qui n'auraient pas été enregistrés.
+export function enregistrerPlongeeAvecAjouts(plongee: Plongee, ajouts: { spot?: Spot; poissons: Poisson[]; equipements: Equipement[] }, modification = false) {
+  const data = lireDonnees();
+  const index = modification ? data.plongees.findIndex((entry) => entry.id === plongee.id) : -1;
+  if (modification && index < 0) return false;
+  if (ajouts.spot) data.spots.push(ajouts.spot);
+  data.poissons.push(...ajouts.poissons);
+  data.equipements.push(...ajouts.equipements);
+  if (modification) data.plongees[index] = plongee;
+  else data.plongees.push(plongee);
+  enregistrer(data);
+  return true;
+}
+
 export const ajouterPlongee = (item: Plongee) => ajouter("plongees", item);
 export const modifierPlongee = (item: Plongee) => modifier("plongees", item);
 export const supprimerPlongee = (id: string) => supprimer("plongees", id);
