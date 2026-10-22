@@ -1,0 +1,15 @@
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import { ajouterSpot, supprimerSpot } from "../../lib/storage";
+import { useDonnees } from "../../lib/use-donnees";
+import type { Spot } from "../../lib/types";
+import { MapPin, Plus, Trash2, CircleAlert, ArrowRight } from "lucide-react";
+import PageHeading from "../../components/page-heading";
+import EmptyState from "../../components/empty-state";
+export default function SpotsPage() {
+  const data = useDonnees(); const [nom, setNom] = useState(""); const [pays, setPays] = useState(""); const [region, setRegion] = useState(""); const [type, setType] = useState<Spot["type"]>("récif"); const [error, setError] = useState("");
+  function save(e: React.FormEvent) { e.preventDefault(); if (!nom.trim()) { setError("Le nom du spot est obligatoire."); return; } ajouterSpot({ id: crypto.randomUUID(), nom: nom.trim(), pays: pays.trim(), region: region.trim(), type }); setNom(""); setPays(""); setRegion(""); setType("récif"); setError(""); }
+  function remove(id: string) { if (window.confirm("Supprimer ce spot ?")) { if (!supprimerSpot(id)) alert("Ce spot est utilisé dans une plongée : supprimez ou modifiez d'abord ces plongées."); } }
+  return <main className="inner-page container"><PageHeading icon={MapPin} title="Mes spots" subtitle="Les sites où vous avez plongé" /><div className="listing-layout"><div><h2 className="subheading">Tous mes spots <span>{data?.spots.length ?? 0}</span></h2><div className="stack-cards">{data?.spots.map((spot) => <article className="panel list-panel" key={spot.id}><div><span className="badge">{spot.type}</span><h3><Link href={`/spots/${spot.id}`}>{spot.nom} <ArrowRight size={18} className="inline-icon" /></Link></h3><p>{[spot.region, spot.pays].filter(Boolean).join(", ") || "Localisation non renseignée"}</p></div><button className="delete-link" type="button" onClick={() => remove(spot.id)}><Trash2 size={15} /> Supprimer</button></article>)}{data?.spots.length === 0 && <EmptyState message="Aucun spot pour l'instant… votre prochain coin de paradis vous attend !" />}</div></div><form className="panel add-panel" onSubmit={save} noValidate><h2>Ajouter un spot</h2><label>Nom *<input value={nom} onChange={(e) => {setNom(e.target.value); setError("");}} placeholder="Ex. La réserve marine" aria-invalid={!!error}/>{error && <small className="field-error"><CircleAlert size={14} />{error}</small>}</label><label>Pays<input value={pays} onChange={(e) => setPays(e.target.value)} placeholder="Ex. France" /></label><label>Région<input value={region} onChange={(e) => setRegion(e.target.value)} placeholder="Ex. Côte d'Azur" /></label><label>Type<select value={type} onChange={(e) => setType(e.target.value as Spot["type"])}><option value="récif">Récif</option><option value="épave">Épave</option><option value="tombant">Tombant</option><option value="autre">Autre</option></select></label><button className="button button-primary" type="submit"><Plus size={18} /> Ajouter le spot</button></form></div></main>;
+}
