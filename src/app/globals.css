@@ -240,4 +240,10 @@ button:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
 .fish-detail-heading .page-heading-icon { margin-bottom:14px; }
 @media (max-width:700px) { .hero { padding-top:69px; }.fish-detail-page { padding-top:110px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; } }
+.equipment-card { justify-content:flex-start; flex-wrap:wrap; }
+.equipment-art { display:block; width:112px; height:94px; flex:none; border-radius:16px; }
+.equipment-copy { flex:1; min-width:120px; }
+.equipment-card .delete-link { margin-left:auto; }
+.fish-banner svg { object-fit:contain; background:#e4f4f4; }
+@media(max-width:450px) { .equipment-card { padding:16px; gap:12px; }.equipment-art { width:86px; height:78px; }.equipment-card .delete-link { margin-left:auto; }.fish-card-link { flex-wrap:nowrap; align-items:center; padding:16px 16px 52px; }.fish-card-art { width:90px; height:90px; flex:none; }.fish-card-arrow { position:static; }.fish-card-copy h3 { font-size:17px; } }
 
